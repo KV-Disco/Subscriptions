@@ -7,7 +7,8 @@ import { Tasks } from '../api/tasks.js';
 
 import Task from './Task.jsx';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
- 
+
+
 // App component - represents the whole app
 class App extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class App extends Component {
       hideCompleted: false,
     };
   }
- 
+
   handleSubmit(event) {
     event.preventDefault();
  
@@ -29,12 +30,11 @@ class App extends Component {
     // Clear form
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
   }
-
-  toggleHideCompleted() {
+  /*toggleHideCompleted() {
     this.setState({
       hideCompleted: !this.state.hideCompleted,
     });
-  }
+  }*/
 
   renderTasks() {
     let filteredTasks = this.props.tasks;
@@ -54,8 +54,29 @@ class App extends Component {
       );
     });
   }
+
+  createUser(){
+    const {tasks} = this.props
+    const {currentUser} = this.props
+
+    if(tasks[0] && currentUser){
+      let userExist = false
+      
+      tasks.forEach(function(task){
+        if(task.username === currentUser.username){
+          userExist = true
+        }
+      })
+
+      if(!userExist){
+        Meteor.call('tasks.insert');
+      }
+    }
+  }
  
   render() {
+    this.createUser()
+
     return (
       <div className="container">
         <header>
