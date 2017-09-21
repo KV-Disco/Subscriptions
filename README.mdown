@@ -3,9 +3,13 @@
 ## Iniciarlo
 Para iniciar la aplicacion deveras descargarla y en el terminal ir a la carpeta y escribir
 
+` meteor npm install`
+
+una ves instaladas las dependencias deveras escribir en el terminal
+
 ` meteor `
 
-esto deveria ejecutarla, luego en un browser ir a http://localhost:3000/
+esto ejecutara la app, luego en un browser ir a http://localhost:3000/
 
 
 ##  Explicacion
