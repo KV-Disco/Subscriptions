@@ -42,9 +42,8 @@ class App extends Component {
       filteredTasks = filteredTasks.filter(task => !task.checked);
     }
     return filteredTasks.map((task) => {
-      const currentUserId = this.props.currentUser && this.props.currentUser._id;
-      const showPrivateButton = task.owner === currentUserId;
- 
+      const showPrivateButton = this.props.currentUser != null
+
       return (
         <Task
           key={task._id}
@@ -58,6 +57,8 @@ class App extends Component {
   createUser(){
     const {tasks} = this.props
     const {currentUser} = this.props
+
+    console.log(currentUser)
 
     if(tasks[0] && currentUser){
       let userExist = false

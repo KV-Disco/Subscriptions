@@ -30,13 +30,15 @@ export default class Task extends Component {
         {/* <button className="delete" onClick={this.deleteThisTask.bind(this)}>
                   &times;
         </button> */}
- 
-        <input
-          type="checkbox"
-          readOnly
-          checked={this.props.task.checked}
-          onClick={this.toggleChecked.bind(this)}
-        /> Subscribe to
+        
+        { this.props.showPrivateButton ? (
+          <span><input
+            type="checkbox"
+            readOnly
+            checked={this.props.task.checked}
+            onClick={this.toggleChecked.bind(this)}
+          /> Subscribe to</span>
+        ) : ''}
 
 {/*     { this.props.showPrivateButton ? (
           <button className="toggle-private" onClick={this.togglePrivate.bind(this)}>
