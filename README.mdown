@@ -1,0 +1,55 @@
+# Ejercicio practico 3
+
+## Iniciarlo
+Para iniciar la aplicacion deveras descargarla y en el terminal ir a la carpeta y escribir
+
+` meteor `
+
+esto deveria ejecutarla, luego en un browser ir a http://localhost:3000/
+
+
+##  Explicacion
+Para hacer esta aplicacion aproveche (basicamente lo canibalize) el tutorial de meteor con react, que ya traía un sistema de registro y login funcional, ademas de otras funciones que aproveche.
+
+En App.jsx cree una funcion ` addUserToList() ` que se ejecuta al renderisar la pagina, ella revisa si el usuario esta loged y si ya esta en la lista, si no se encuentra en la lista ejecuta ` Meteor.call('tasks.insert') ` que se encarga de añadirlo.
+
+Funcion ` addUserToList() `
+```
+  addUserToList(){
+    const {tasks} = this.props
+    const {currentUser} = this.props
+
+    if(tasks[0] && currentUser){
+      let userExist = false
+      
+      tasks.forEach(function(task){
+        if(task.username === currentUser.username){
+          userExist = true
+        }
+      })
+
+      if(!userExist){
+        Meteor.call('tasks.insert');
+      }
+    }
+  }
+```
+
+Funcion ` Meteor.call('tasks.insert') `
+```
+  'tasks.insert'() {
+ 
+    // Make sure the user is logged in before inserting a task
+    if (! Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
+ 
+    Tasks.insert({
+      createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username,
+    });
+  },
+```
+
+Luego aprovecho la funcion de privatisacion de tasks que trae ya el tutorial para manejar las subscripcions.
