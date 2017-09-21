@@ -1,4 +1,4 @@
-# Ejercicio practico 3
+# Ejercicio practico 2
 
 ## Iniciarlo
 Para iniciar la aplicacion deveras descargarla y en el terminal ir a la carpeta y escribir
